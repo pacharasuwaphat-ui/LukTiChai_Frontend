@@ -114,9 +114,9 @@ export default function Login() {
               className="w-full bg-gray-100 rounded-lg px-4 py-2 mb-2 outline-none"
             />
 
-            <a href="#" className="text-xs text-blue-500 mb-5 cursor-pointer">
+            <Link href="/forgot-password" className="text-xs text-blue-500 mb-5 cursor-pointer">
               Forgot your password?
-            </a>
+            </Link>
 
             <button
               type="submit"
