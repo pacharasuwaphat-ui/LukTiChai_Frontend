@@ -1,5 +1,7 @@
+import Link from "next/link";
 
-export default function Login() {
+
+export default function SignUp() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white">
 
@@ -16,11 +18,11 @@ export default function Login() {
             Continue Your Fortune Journey
           </p>
 
-          <a href="#">
+          <Link href="/">
             <button className="border border-white px-6 py-2 rounded-full hover:bg-white hover:text-purple-700 transition">
               SIGN IN
             </button>
-          </a>
+          </Link>
 
         </div>
         
