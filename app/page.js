@@ -1,83 +1,70 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-export default function Home() {
-
+export default function Login() {
   return (
-    <div className="bg-[radial-gradient(circle_at_top,#690dda,#000000)] font-mono text-white min-h-screen flex flex-col items-center scroll-smooth">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
 
-      {/* nav bar */}
-      <nav className="bg-[#0F1021]/90 backdrop-blur-md border-b border-yellow-500/30 flex justify-between items-center px-10 py-4 w-full">
-        <div className="text-yellow-400 font-bold text-lg">
-          🔮 Luck Ti Chai
-        </div>
+      <h1 className="text-4xl font-bold mb-10">Luck Ti Chai</h1>
 
-        <div>
-          <ul className="flex flex-row gap-4 font-bold items-center">
-            <li><a className="nav-link" href="#">Home</a></li>
-            <li><a className="nav-link" href="#">History</a></li>
-            <li><a className="nav-link" href="#">เปิดไพ่</a></li>
-            <li><a className="nav-link" href="#">ดูดวงวัน/เดือน/ปีเกิด</a></li>
-            <li><a className="nav-link" href="#">สุ่มเซียมซี</a></li>
-            <li><a className="nav-link" href="#">ลูกเต๋าพยากรณ์</a></li>
-            <li><a className="nav-link" href="#">ทำนายเบอร์โทร</a></li>
-            <li><a href="#"><div className="h-10 w-10 rounded-full bg-gray-500 flex justify-center items-center">?</div></a></li>
-          </ul>
-        </div>
-      </nav>
+      <div className="flex w-[800px] rounded-3xl shadow-2xl shadow-black/50 overflow-hidden">
 
-      <section className="text-center pt-24 pb-26 px-5">
-        <h1 className="text-4xl font-bold text-yellow-400">🔮 Luck Ti Chai</h1>
-        <p className="text-lg font-bold mt-5 mb-8">ค้นพบคำตอบของชีวิตคุณ</p>
-        <a href="#types" className="bg-yellow-400 text-black font-bold px-8 py-3 rounded-full hover:bg-white hover:shadow-[0_0_20px_gold] transition">ดูดวงตอนนี้</a>
-      </section>
+        {/* Left - Sign In */}
+        <div className="w-1/2 bg-white p-10 flex flex-col items-center">
 
-      <section id="types" className="px-5 py-16 text-center font-bold">
-        <h2 className="text-2xl mb-10">เลือกรูปแบบการดูดวงที่ต้องการ</h2>
-        <div className="flex gap-5">
-          <div className="flex-1 flex flex-col items-center gap-3 bg-white/5 rounded-[15px] p-[30px] border border-yellow-500/20 cursor-pointer transition duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.6)]"><div className="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center mb-2">1</div><a href="#">เปิดไพ่</a></div>
-          <div className="flex-1 flex flex-col items-center gap-3 bg-white/5 rounded-[15px] p-[30px] border border-yellow-500/20 cursor-pointer transition duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.6)]"><div className="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center mb-2">2</div><a href="#">ดูดวง<br/>วัน/เดือน/ปีเกิด</a></div>
-          <div className="flex-1 flex flex-col items-center gap-3 bg-white/5 rounded-[15px] p-[30px] border border-yellow-500/20 cursor-pointer transition duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.6)]"><div className="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center mb-2">3</div><a href="#">สุ่มเซียมซี</a></div>
-          <div className="flex-1 flex flex-col items-center gap-3 bg-white/5 rounded-[15px] p-[30px] border border-yellow-500/20 cursor-pointer transition duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.6)]"><div className="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center mb-2">4</div><a href="#">ลูกเต๋าพยากรณ์</a></div>
-          <div className="flex-1 flex flex-col items-center gap-3 bg-white/5 rounded-[15px] p-[30px] border border-yellow-500/20 cursor-pointer transition duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.6)]"><div className="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center mb-2">5</div><a href="#">ทำนาย<br/>เบอร์โทร</a></div>
-        </div> 
-      </section>
+          <h2 className="text-3xl font-bold mb-5">Sign In</h2>
 
-      <footer className="w-full mt-20 border-t border-white/10 pt-10 pb-6 text-sm text-white/80">
-        {/* 3 column */}
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
-
-          {/* Contact */}
-          <div className="text-center">
-            <h3 className="font-bold mb-3 text-white">Contact us</h3>
-            <p>Phone : 0x-xxx-xxxx</p>
-            <p>Facebook : xxxx</p>
+          {/* Social */}
+          <div className="flex gap-4 mb-5">
+            <a href="#"><div className="w-10 h-10 bg-blue-500 rounded-full"></div></a>
+            <a href="#"><div className="w-10 h-10 bg-red-500 rounded-full"></div></a>
+            <a href="#"><div className="w-10 h-10 bg-pink-500 rounded-full"></div></a>
           </div>
 
-          {/* Account */}
-          <div className="text-center">
-            <h3 className="font-bold mb-3 text-white">บัญชี</h3>
-            <p className="cursor-pointer hover:text-yellow-400">เข้าสู่ระบบ</p>
-            <p className="cursor-pointer hover:text-yellow-400">ประวัติการทำนาย</p>
-            <p className="cursor-pointer hover:text-yellow-400">สมัครใช้งาน</p>
-          </div>
+          <p className="text-gray-400 text-sm mb-4">or use your account</p>
 
-          {/* Services */}
-          <div className="text-center">
-            <h3 className="font-bold mb-3 text-white">Services</h3>
-            <p className="cursor-pointer hover:text-yellow-400">About us</p>
-            <p className="cursor-pointer hover:text-yellow-400">github link</p>
-          </div>
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="w-full bg-gray-100 rounded-lg px-4 py-2 mb-3 outline-none"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full bg-gray-100 rounded-lg px-4 py-2 mb-2 outline-none"
+          />
+
+          <a href="#" className="text-xs text-blue-500 mb-5 cursor-pointer">
+            Forgot your password?
+          </a>
+          
+          <a href="#">
+            <button className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white px-8 py-2 rounded-full font-bold shadow-lg hover:scale-105 transition">
+              SIGN IN
+            </button>
+          </a>
 
         </div>
 
-        {/* copyright */}
-        <div className="text-center mt-10 text-white/50 text-xs">
-          © 2026 Luck Ti Chai | พลังแห่งจักรวาลนำทางคุณ
+        {/* Right - Welcome */}
+        <div className="w-1/2 bg-gradient-to-b from-purple-600 to-indigo-900 text-white flex flex-col items-center justify-center p-10">
+
+          <h2 className="text-3xl font-bold mb-3">Hello There!</h2>
+
+          <p className="text-center text-sm mb-6">
+            Begin Your Fortune Journey <br />
+            by creating an account with us today
+          </p>
+
+          <a href="#">
+            <button className="border border-white px-6 py-2 rounded-full hover:bg-white hover:text-purple-700 transition">
+              SIGN UP
+            </button>
+          </a>
+
         </div>
 
-      </footer>
+      </div>
     </div>
   );
 }
