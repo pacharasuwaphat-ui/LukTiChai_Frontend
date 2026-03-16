@@ -1,0 +1,156 @@
+"use client";
+
+import { use } from "react";
+import { useSearchParams } from "next/navigation";
+
+export default function ResultPage() {
+  const searchParams = useSearchParams();
+  const cards = searchParams.get("cards")?.split(",").map(c => c.trim()) || [];
+  console.table(cards);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-purple-700 to-purple-900 flex items-center justify-center p-6">
+
+      <div className="bg-[#070B2B] text-white rounded-xl w-full max-w-5xl p-10 shadow-xl">
+
+        {/* Header */}
+        <div className="flex gap-6 items-start">
+          <img
+            src="/card/SunCard.png"
+            alt="sun card"
+            className="w-28 h-40 object-cover rounded"
+          />
+
+          <div>
+            <h1 className="text-2xl font-bold mb-3">ดูดวงเปิดไพ่ยิปซี</h1>
+
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl">
+              ดูดวงของคุณวันนี้ด้วยไพ่ยิปซี หรือไพ่ทาโรต์ ศาสตร์การดูดวงที่มีมาตั้งแต่โบราณกาล
+              โดยให้ท่านเลือกไพ่เพียง 1 ใบ แล้วไพ่ยิปซีหรือไพ่ทาโรต์จะเปิดเผยเรื่องราวในวันนี้ให้กับคุณทราบ
+            </p>
+          </div>
+        </div>
+
+        <hr className="my-8 border-gray-600" />
+
+        {/* Selected card */}
+        <p className="text-gray-300 mb-6">ไพ่ที่คุณเลือกมาได้ ดังนี้</p>
+
+        <div className="flex justify-center gap-8 mb-10">
+          {cards.map((card, index) => (
+            <div key={index} className="text-center">
+              <img  src={`/card/MajorCard/${card}.jpg`} className="w-40 h-60 object-cover rounded shadow" />
+              <p className="mt-2 text-sm text-gray-300">
+                {index === 0 && "Present"}
+                {index === 1 && "Obstacle"}
+                {index === 2 && "Summary"}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Warning */}
+        <div className="space-y-4 text-sm leading-relaxed">
+
+          <p className="text-red-500 font-semibold">คำเตือน</p>
+          <p className="text-gray-300">
+            ไพ่ยิปซีมีอำนาจลึกลับ จึงไม่ควรดูบ่อยเกินวันละ 1 ครั้ง
+            เป็นความเชื่อส่วนบุคคล โปรดใช้วิจารณญาณในการดูดวง
+          </p>
+
+          <p>
+            <span className="text-red-500 font-semibold">ไพ่ที่คุณจับได้</span>{" "}
+            คือ <span className="font-semibold">Death (ยมทูต)</span>
+          </p>
+
+          <p>
+            <span className="text-red-500 font-semibold">คำทำนาย</span>{" "}
+            ความรักของคุณจะมีอุปสรรค ทำอะไรก็ไม่ค่อยเป็นไปตามแผน
+            ระวังการทะเลาะกับคนรักหรือคนใกล้ตัว
+          </p>
+
+          <p>
+            <span className="text-red-500 font-semibold">คำแนะนำ</span>{" "}
+            ให้หมั่นทำบุญตักบาตร สวดมนต์ และใจเย็นให้มากขึ้น
+            อย่าใช้อารมณ์ในการตัดสินใจเรื่องสำคัญ
+          </p>
+
+          <p>
+            <span className="text-red-500 font-semibold">เสริมดวง</span>{" "}
+            ให้ไปกราบไหว้สิ่งศักดิ์สิทธิ์ หรือพกเครื่องรางที่ช่วยเสริมพลังด้านจิตใจ
+          </p>
+
+          <p>
+            <span className="text-red-500 font-semibold">วัตถุมงคล</span>{" "}
+            (เป็นการแนะนำเพื่อเสริมดวง)
+          </p>
+        </div>
+
+        {/* Products */}
+        <div className="grid grid-cols-3 gap-10 mt-10">
+
+          {/* item */}
+          <div className="text-center">
+            <img
+              src="/amulet1.png"
+              className="w-40 mx-auto mb-4"
+            />
+            <button className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">
+              ซื้อเลย
+            </button>
+          </div>
+
+          <div className="text-center">
+            <img
+              src="/amulet2.png"
+              className="w-40 mx-auto mb-4"
+            />
+            <button className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">
+              ซื้อเลย
+            </button>
+          </div>
+
+          <div className="text-center">
+            <img
+              src="/amulet3.png"
+              className="w-40 mx-auto mb-4"
+            />
+            <button className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">
+              ซื้อเลย
+            </button>
+          </div>
+
+        </div>
+
+        {/* Footer */}
+        <div className="mt-14 border-t border-gray-700 pt-8 grid grid-cols-3 gap-6 text-sm text-gray-300">
+
+          <div>
+            <h3 className="font-semibold mb-2">Contact us</h3>
+            <p>Phone : 0x-xxx-xxxx</p>
+            <p>Facebook : xxxx</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-2">บัญชี</h3>
+            <p>แก้ไข</p>
+            <p>ประวัติการทำนาย</p>
+            <p>สิทธิประโยชน์</p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-2">สำหรับธุรกิจ</h3>
+            <p>คำแนะนำ</p>
+            <p>แนะนำวัตถุมงคล</p>
+          </div>
+
+        </div>
+
+        <p className="text-center text-gray-400 text-xs mt-8">
+          © 2026 Luck Ti Chai | พ่อหมอดูดวงสำหรับคุณ
+        </p>
+
+      </div>
+    </div>
+  );
+}
