@@ -1,12 +1,52 @@
 "use client";
 
-import { use } from "react";
+import { useEffect , useState} from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function ResultPage() {
+  const [Result, setResult] = useState("");
+
   const searchParams = useSearchParams();
   const cards = searchParams.get("cards")?.split(",").map(c => c.trim()) || [];
-  console.table(cards);
+
+  const Setdata = async () => {
+    try {
+        // ยิง request ไป backend NestJS
+        const res = await fetch("http://localhost:4000/fortune/card", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          // ส่งข้อมูลไป backend
+          body: JSON.stringify({
+            Present : cards[0],
+            Advice : cards[1],
+            Outcome : cards[2],
+          }),
+        });
+
+        // แปลง response จาก backend เป็น json
+        const data = await res.json();
+
+        // ถ้า backend ส่ง error กลับมา
+        if (!res.ok) {
+          setMessage(data.message || "get fortune card failed");
+          return;
+        }
+
+        // แสดงผลลัพธ์ที่ได้จาก backend
+        setResult(data.readings);
+
+      } catch (error) {
+        // กรณี server ปิด หรือเชื่อมต่อไม่ได้
+        setMessage("Website is currently unavailable. Please try again later.");
+      }
+  };
+
+  useEffect(() => {
+    Setdata();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-700 to-purple-900 flex items-center justify-center p-6">
@@ -60,19 +100,12 @@ export default function ResultPage() {
 
           <p>
             <span className="text-red-500 font-semibold">ไพ่ที่คุณจับได้</span>{" "}
-            คือ <span className="font-semibold">Death (ยมทูต)</span>
+            คือ <span className="font-semibold">{cards.map((card) => card).join(" , ")}</span>
           </p>
 
           <p>
             <span className="text-red-500 font-semibold">คำทำนาย</span>{" "}
-            ความรักของคุณจะมีอุปสรรค ทำอะไรก็ไม่ค่อยเป็นไปตามแผน
-            ระวังการทะเลาะกับคนรักหรือคนใกล้ตัว
-          </p>
-
-          <p>
-            <span className="text-red-500 font-semibold">คำแนะนำ</span>{" "}
-            ให้หมั่นทำบุญตักบาตร สวดมนต์ และใจเย็นให้มากขึ้น
-            อย่าใช้อารมณ์ในการตัดสินใจเรื่องสำคัญ
+            {Result}
           </p>
 
           <p>
