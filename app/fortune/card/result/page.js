@@ -39,11 +39,11 @@ export default function ResultPage() {
         <div className="flex justify-center gap-8 mb-10">
           {cards.map((card, index) => (
             <div key={index} className="text-center">
-              <img  src={`/card/MajorCard/${card}.jpg`} className="w-40 h-60 object-cover rounded shadow" />
+              <img  src={`/card/MajorCard/${card}.jpg`} className="w-38 h-65 object-cover rounded shadow" />
               <p className="mt-2 text-sm text-gray-300">
                 {index === 0 && "Present"}
-                {index === 1 && "Obstacle"}
-                {index === 2 && "Summary"}
+                {index === 1 && "Advice"}
+                {index === 2 && "Outcome"}
               </p>
             </div>
           ))}
@@ -86,41 +86,7 @@ export default function ResultPage() {
           </p>
         </div>
 
-        {/* Products */}
-        <div className="grid grid-cols-3 gap-10 mt-10">
 
-          {/* item */}
-          <div className="text-center">
-            <img
-              src="/amulet1.png"
-              className="w-40 mx-auto mb-4"
-            />
-            <button className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">
-              ซื้อเลย
-            </button>
-          </div>
-
-          <div className="text-center">
-            <img
-              src="/amulet2.png"
-              className="w-40 mx-auto mb-4"
-            />
-            <button className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">
-              ซื้อเลย
-            </button>
-          </div>
-
-          <div className="text-center">
-            <img
-              src="/amulet3.png"
-              className="w-40 mx-auto mb-4"
-            />
-            <button className="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300 transition">
-              ซื้อเลย
-            </button>
-          </div>
-
-        </div>
 
         {/* Footer */}
         <div className="mt-14 border-t border-gray-700 pt-8 grid grid-cols-3 gap-6 text-sm text-gray-300">

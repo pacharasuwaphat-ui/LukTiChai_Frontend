@@ -167,8 +167,8 @@ export default function Home() {
             {selectedCards.map((c, i) => (
               <span key={i} className="mx-2">
                 {i === 0 && "Present"}
-                {i === 1 && "Obstacle"}
-                {i === 2 && "Summary"}
+                {i === 1 && "Advice"}
+                {i === 2 && "Outcome"}
               </span>
             ))}
           </div>
