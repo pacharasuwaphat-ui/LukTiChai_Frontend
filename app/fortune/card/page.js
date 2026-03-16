@@ -34,8 +34,8 @@ export default function Home() {
     "THE_STAR",
     "THE_MOON",
     "THE_SUN",
-    "JUDGMENT",
-    "THE_WORLD",
+    "JUDGEMENT",
+    "THE_WORLD"
   ];
 
   const handleSelect = (index) => {

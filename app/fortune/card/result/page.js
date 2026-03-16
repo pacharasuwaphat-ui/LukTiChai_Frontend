@@ -107,16 +107,6 @@ export default function ResultPage() {
             <span className="text-red-500 font-semibold">คำทำนาย</span>{" "}
             {Result}
           </p>
-
-          <p>
-            <span className="text-red-500 font-semibold">เสริมดวง</span>{" "}
-            ให้ไปกราบไหว้สิ่งศักดิ์สิทธิ์ หรือพกเครื่องรางที่ช่วยเสริมพลังด้านจิตใจ
-          </p>
-
-          <p>
-            <span className="text-red-500 font-semibold">วัตถุมงคล</span>{" "}
-            (เป็นการแนะนำเพื่อเสริมดวง)
-          </p>
         </div>
 
 
