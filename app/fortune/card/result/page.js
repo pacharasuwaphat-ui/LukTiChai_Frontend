@@ -13,7 +13,7 @@ export default function ResultPage() {
   const Setdata = async () => {
     try {
         // ยิง request ไป backend NestJS
-        const res = await fetch(`http://${process.env.HOST}:4000/fortune/card`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fortune/card`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
