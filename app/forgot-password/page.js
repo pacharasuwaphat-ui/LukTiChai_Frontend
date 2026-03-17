@@ -19,7 +19,7 @@ export default function Forgot() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:4000/auth/forgot-password", {
+      const res = await fetch(`http://${process.env.HOST}:4000/auth/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -2,6 +2,7 @@
 
 import { useEffect , useState} from "react";
 import { useSearchParams } from "next/navigation";
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 export default function ResultPage() {
   const [Result, setResult] = useState("");
@@ -12,7 +13,7 @@ export default function ResultPage() {
   const Setdata = async () => {
     try {
         // ยิง request ไป backend NestJS
-        const res = await fetch("http://localhost:4000/fortune/card", {
+        const res = await fetch(`http://${process.env.HOST}:4000/fortune/card`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

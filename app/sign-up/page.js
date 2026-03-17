@@ -42,7 +42,7 @@ export default function SignUp() {
 
     try {
       // ยิง request ไป backend NestJS
-      const res = await fetch("http://localhost:4000/auth/register", {
+      const res = await fetch(`http://${process.env.HOST}:4000/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
