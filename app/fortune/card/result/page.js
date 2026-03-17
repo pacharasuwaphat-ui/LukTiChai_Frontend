@@ -15,6 +15,7 @@ export default function ResultPage() {
 
   const Setdata = async () => {
     setCARDS([cards[0], cards[1], card3]);
+    console.log("Received cards:", CARDS);
 
       // แสดงผลลัพธ์ที่ได้จาก backend
       setResult(readings);
@@ -53,7 +54,7 @@ export default function ResultPage() {
         <p className="text-gray-300 mb-6">ไพ่ที่คุณเลือกมาได้ ดังนี้</p>
 
         <div className="flex justify-center gap-8 mb-10">
-          {cards.map((card, index) => (
+          {CARDS.map((card, index) => (
             <div key={index} className="text-center">
               <img  src={`/card/MajorCard/${card}.jpg`} className="w-38 h-65 object-cover rounded shadow" />
               <p className="mt-2 text-sm text-gray-300">
