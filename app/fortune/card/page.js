@@ -8,6 +8,8 @@ export default function Home() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [confirmed, setConfirmed] = useState(false);
   const [deck, setDeck] = useState([]);
+  const [Result, setResult] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setDeck(shuffle(majorArcana));
@@ -69,9 +71,41 @@ export default function Home() {
     return arr;
   }
 
-  const goResult = () => {
+  const goResult = async () => {
     const chosen = selectedCards.map(i => deck[i]);
-    router.push(`/fortune/card/result?cards=${chosen.join(",")}`);
+    try {
+      const userStr = localStorage.getItem("user");
+      const user = JSON.parse(userStr);
+
+        // ยิง request ไป backend NestJS
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fortune/card`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      
+        // ส่งข้อมูลไป backend
+        body: JSON.stringify({
+          Present : chosen[0],
+          Advice : chosen[1],
+          Outcome : chosen[2],
+          userId : user.id
+        }),
+      });
+
+      // แปลง response จาก backend เป็น json
+      const data = await res.json();
+
+      // ถ้า backend ส่ง error กลับมา
+      if (!res.ok) {
+        setMessage(data.message || "get fortune card failed");
+        return;
+      }
+      router.push(`/fortune/card/result?cards=${chosen.join(",")}?readings=${data.readings}`);
+    } catch (error) {
+      // กรณี server ปิด หรือเชื่อมต่อไม่ได้
+      setMessage("Website is currently unavailable. Please try again later.");
+    } 
   };
 
   return (

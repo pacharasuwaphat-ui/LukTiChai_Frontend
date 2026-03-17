@@ -5,43 +5,19 @@ import { useSearchParams } from "next/navigation";
 
 export default function ResultPage() {
   const [Result, setResult] = useState("");
+  const [message, setMessage] = useState("");
+  const [CARDS , setCARDS] = useState([]);
 
   const searchParams = useSearchParams();
-  const cards = searchParams.get("cards")?.split(",").map(c => c.trim()) || [];
+  let cards = searchParams.get("cards")?.split(",").map(c => c.trim()) || [];
+  const [card3, readings] = cards[2].split("?readings=");
+  
 
   const Setdata = async () => {
-    try {
-        // ยิง request ไป backend NestJS
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fortune/card`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+    setCARDS([cards[0], cards[1], card3]);
 
-          // ส่งข้อมูลไป backend
-          body: JSON.stringify({
-            Present : cards[0],
-            Advice : cards[1],
-            Outcome : cards[2],
-          }),
-        });
-
-        // แปลง response จาก backend เป็น json
-        const data = await res.json();
-
-        // ถ้า backend ส่ง error กลับมา
-        if (!res.ok) {
-          setMessage(data.message || "get fortune card failed");
-          return;
-        }
-
-        // แสดงผลลัพธ์ที่ได้จาก backend
-        setResult(data.readings);
-
-      } catch (error) {
-        // กรณี server ปิด หรือเชื่อมต่อไม่ได้
-        setMessage("Website is currently unavailable. Please try again later.");
-      }
+      // แสดงผลลัพธ์ที่ได้จาก backend
+      setResult(readings);
   };
 
   useEffect(() => {
@@ -100,7 +76,7 @@ export default function ResultPage() {
 
           <p>
             <span className="text-red-500 font-semibold">ไพ่ที่คุณจับได้</span>{" "}
-            คือ <span className="font-semibold">{cards.map((card) => card).join(" , ")}</span>
+            คือ <span className="font-semibold">{CARDS.map((card) => card).join(" , ")}</span>
           </p>
 
           <p>
