@@ -34,9 +34,9 @@ export default function history() {
         // map ให้ตรงกับ UI เดิม
         const formatted = data.map((item, index) => ({
           id: item._id,
-          title: `ดูดวงแบบ : ${item.type}`,
+          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" : "ลูกเต๋าพยากรณ์"}`,
           date: new Date(item.createdAt).toLocaleString(),
-          image: "/card/SunCard.png"
+          image: item.type === "card" ? "/card/SunCard.png" : "/disc.png"
         }));
 
         setHistory(formatted);
@@ -51,10 +51,26 @@ export default function history() {
   const handleReplay = (id) => {
 
       const selected = hisData.find(item => item._id === id);
-      const cards = selected.cards;
-      const readings = selected.reading;
-      router.push(`/fortune/card/result?cards=${cards.present},${cards.advice},${cards.outcome}?readings=${readings}`);
+      if(selected.type === "card") {
+
+        const cards = selected.cards;
+        const readings = selected.reading;
+
+        router.push(`/fortune/card/result?cards=${cards.present},${cards.advice},${cards.outcome}?readings=${readings}`);
+
+      } else if (selected.type === "dice") {
+
+        const dice = selected.dice;
+        const dice_id = dice.dice_id;
+        const dice_name = dice.dice_name;
+        const readings = selected.reading;
+        const advice = dice.dice_advice;
+        
+        router.push(`/fortune/disc/result/${[dice_id.zodiac, dice_id.planet, dice_id.house].join("-")}/
+${[dice_name.zodiac, dice_name.planet, dice_name.house].join("-")}/${readings}/
+${advice}`);
     };
+  };
 
   return (
     <div>

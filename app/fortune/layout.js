@@ -16,7 +16,7 @@ export default function HomeLayout({ children }) {
             <li><Link className="nav-link" href="/fortune/card">เปิดไพ่</Link></li>
             <li><Link className="nav-link" href="/fortune-telling">ดูดวงวัน/เดือน/ปีเกิด</Link></li>
             <li><Link className="nav-link" href="/random-luck">สุ่มเซียมซี</Link></li>
-            <li><Link className="nav-link" href="/dice-forecast">ลูกเต๋าพยากรณ์</Link></li>
+            <li><Link className="nav-link" href="/fortune/disc">ลูกเต๋าพยากรณ์</Link></li>
             <li><a className="nav-link" href="#">ทำนายเบอร์โทร</a></li>
             <li><a href="#"><div className="h-10 w-10 rounded-full bg-gray-500 flex justify-center items-center">?</div></a></li>
           </ul>

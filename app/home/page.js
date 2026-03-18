@@ -2,7 +2,7 @@
 export default function Home() {
 
   return (
-    <div>
+    <div className="mt-10">
 
       <section className="text-center pt-24 pb-26 px-5">
         <h1 className="text-4xl font-bold text-yellow-400">🔮 Luck Ti Chai</h1>
