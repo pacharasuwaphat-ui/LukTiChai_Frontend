@@ -34,9 +34,9 @@ export default function history() {
         // map ให้ตรงกับ UI เดิม
         const formatted = data.map((item, index) => ({
           id: item._id,
-          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" : "ลูกเต๋าพยากรณ์"}`,
+          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" :  item.type ==="dice"? "ลูกเต๋าพยากรณ์" : "เสี่ยงเซียมซี"}`,
           date: new Date(item.createdAt).toLocaleString(),
-          image: item.type === "card" ? "/card/SunCard.png" : "/disc.png"
+          image: item.type === "card" ? "/card/SunCard.png" : item.type ==="dice"? "/disc.png": "/siamsi.png"
         }));
 
         setHistory(formatted);
@@ -58,7 +58,8 @@ export default function history() {
 
         router.push(`/fortune/card/result?cards=${cards.present},${cards.advice},${cards.outcome}?readings=${readings}`);
 
-      } else if (selected.type === "dice") {
+      } 
+      else if (selected.type === "dice") {
 
         const dice = selected.dice;
         const dice_id = dice.dice_id;
@@ -69,7 +70,16 @@ export default function history() {
         router.push(`/fortune/disc/result/${[dice_id.zodiac, dice_id.planet, dice_id.house].join("-")}/
 ${[dice_name.zodiac, dice_name.planet, dice_name.house].join("-")}/${readings}/
 ${advice}`);
-    };
+      }
+      else if ( selected.type === "siamsi"){
+        const siamsi = selected.siamsi;
+        const number = siamsi.siamsi_number;
+        const advice = siamsi.siamsi_advice;
+        const level = siamsi.siamsi_level;
+        const readings = selected.reading;
+
+        router.push(`/fortune/siamsi/result/${number}/${level}/${advice}/${readings}`);
+      }
   };
 
   return (
