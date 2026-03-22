@@ -25,7 +25,6 @@ export default function ProfilePage() {
         if (user) {
             setForm({
             username: user.username || "",
-            email: user.email || "",
             phone: user.phone || "",
             dob: user.dob || "",
             });
@@ -39,30 +38,65 @@ export default function ProfilePage() {
         });
     };
 
-    const handleSave = () => {
+    const handleSave = async() => {
+      try {
         const updatedUser = {
             ...user,
             ...form,
             profileImage: preview || user?.profileImage,
         };
-
-        setUser(updatedUser);
         
+        console.table(updatedUser)
 
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/update`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: updatedUser.id,
+            username: updatedUser.username,
+            phone: updatedUser.phone,
+            dob: updatedUser.dob,
+            profileImage: updatedUser.profileImage,
+          }),
+        });
+        const data = await res.json();
+        // ถ้า post fail
+        if (!res.ok) {
+          setMessage(data.message || "save data fail");
+          return;
+        }
+        // return;
+        setUser(updatedUser);
         localStorage.setItem("user", JSON.stringify(updatedUser));
 
         setIsEdit(false);
+      } catch (error) {
+        
+      }
+        
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    const uploadImage = async (file) => {
+      const formData = new FormData();
+      formData.append("file", file);
 
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPreview(reader.result);
-        };
-        reader.readAsDataURL(file);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      return data.url;
+    };
+    const handleImageChange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const url = await uploadImage(file); // 🔥 ยิงไป backend
+      console.log(url)
+      setPreview(url);
     };
 
     
@@ -81,11 +115,11 @@ export default function ProfilePage() {
           />
 
           <h1 className="text-2xl font-bold mt-4">
-            {user?.username || "Luck tichai"}
+            {user?.username}
           </h1>
 
           <p className="text-gray-300">
-            {user?.email || "lucktichai1234@gmail.com"}
+            {user?.email}
           </p>
         </div>
 
@@ -113,7 +147,7 @@ export default function ProfilePage() {
             <div className="flex justify-between">
               <span>Email :</span>
               <span className="underline">
-                {user?.email || "lucktichai1234@gmail.com"}
+                {user?.email }
               </span>
             </div>
 
@@ -197,14 +231,6 @@ export default function ProfilePage() {
                 value={form.username}
                 onChange={handleChange}
                 placeholder="Username"
-                className="w-full p-2 rounded bg-white/10 outline-none"
-                />
-
-                <input
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Email"
                 className="w-full p-2 rounded bg-white/10 outline-none"
                 />
 
