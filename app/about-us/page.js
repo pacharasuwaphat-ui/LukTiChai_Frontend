@@ -31,7 +31,7 @@ const [open, setOpen] = useState(false);
     <div className="bg-[#070b1a] font-mono text-white scroll-smooth width-100%">
 
       {/* nav bar */}
-      <nav className="bg-[#0F1021]/90 backdrop-blur-md border-b border-yellow-500/30 flex justify-between items-center px-10 py-4 w-full fixed top-0 z-50">
+      <nav className="relative bg-[#0F1021]/90 backdrop-blur-md border-b border-yellow-500/30 flex justify-between items-center px-10 py-4 w-full top-0 z-50">
         <div className="text-yellow-400 font-bold text-lg">
           🔮 Luck Ti Chai
         </div>
@@ -60,7 +60,7 @@ const [open, setOpen] = useState(false);
 
               {/* Popup */}
               {open && (
-                <div className="absolute right-0 mt-4 w-72 bg-gradient-to-b from-[#0b0f2c] to-[#1b1f4a] rounded-2xl shadow-2xl p-6 border border-white/10 z-50">
+                <div className="absolute right-0 mt-4 w-72 bg-gradient-to-b from-[#0b0f2c] to-[#1b1f4a] rounded-2xl shadow-2xl p-6 border border-white/10 z-[9999]">
 
                   <div className="flex flex-col items-center mb-4">
                   <img

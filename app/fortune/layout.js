@@ -28,7 +28,7 @@ export default function HomeLayout({ children }) {
   return (
     <div className="bg-[radial-gradient(circle_at_top,#690dda,#000000)] font-mono text-white min-h-screen flex flex-col items-center scroll-smooth">
         {/* nav bar */}
-      <nav className="bg-[#0F1021]/90 backdrop-blur-md border-b border-yellow-500/30 flex justify-between items-center px-10 py-4 w-full fixed top-0 z-50">
+      <nav className="bg-[#0F1021]/90 backdrop-blur-md border-b border-yellow-500/30 flex justify-between items-center px-10 py-4 w-full top-0 z-50">
         <div className="text-yellow-400 font-bold text-lg">
           🔮 Luck Ti Chai
         </div>
