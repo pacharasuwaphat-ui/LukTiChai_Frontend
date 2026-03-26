@@ -36,7 +36,7 @@ export default function Home() {
     "THE_STAR",
     "THE_MOON",
     "THE_SUN",
-    "JUDGMENT",
+    "JUDGEMENT",
     "THE_WORLD",
   ];
 

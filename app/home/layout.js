@@ -41,7 +41,7 @@ export default function HomeLayout({ children }) {
             <li><Link className="nav-link" href="/fortune-telling">ดูดวงวัน/เดือน/ปีเกิด</Link></li>
             <li><Link className="nav-link" href="/fortune/siamsi">สุ่มเซียมซี</Link></li>
             <li><Link className="nav-link" href="/fortune/disc">ลูกเต๋าพยากรณ์</Link></li>
-            <li><a className="nav-link" href="#">ทำนายเบอร์โทร</a></li>
+            <li><a className="nav-link" href="/fortune/phone">ทำนายเบอร์โทร</a></li>
             <li className="relative" ref={ref}>
               {/* Profile Icon */}
               <div
@@ -84,11 +84,11 @@ export default function HomeLayout({ children }) {
                     </div>
 
                     <div className="px-4 py-2 rounded-lg cursor-pointer hover:bg-white/10 transition">
-                      history
+                      <Link href={"/home/history"}>history</Link>
                     </div>
 
                     <div className="px-4 py-2 rounded-lg cursor-pointer hover:bg-white/10 transition">
-                      About us / Contact us
+                      <Link href={"/about-us"}>About us / Contact us</Link>
                     </div>
                   </div>
                 </div>
