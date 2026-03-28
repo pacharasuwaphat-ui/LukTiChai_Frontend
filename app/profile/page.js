@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState  } from "react";
 
 export default function ProfilePage() {
     
@@ -17,7 +18,9 @@ export default function ProfilePage() {
   useEffect(() => {
     const userString = localStorage.getItem("user");
     if (userString) {
-      setUser(JSON.parse(userString));
+      const parsed = JSON.parse(userString);
+    // console.log(parsed); // ✅ เห็นค่าแน่นอน
+    setUser(parsed);
     }
   }, []);
 
@@ -178,12 +181,12 @@ export default function ProfilePage() {
             <div>
               <span className="mr-2">Coin :</span>
               <span className="font-semibold">
-                {user?.coin || 12} Coin
+                {user?.coin ?? 12} Coin
               </span>
             </div>
 
             <button className="px-5 py-2 rounded-full bg-indigo-500/40 hover:bg-indigo-500/70 transition">
-              Add Coin
+              <Link href='/home/payment'> Add Coin </Link>
             </button>
           </div>
         </div>

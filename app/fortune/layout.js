@@ -38,7 +38,7 @@ export default function HomeLayout({ children }) {
             <li><Link className="nav-link" href="/home">Home</Link></li>
             <li><Link className="nav-link" href="/home/history">History</Link></li>
             <li><Link className="nav-link" href="/fortune/card">เปิดไพ่</Link></li>
-            <li><Link className="nav-link" href="/fortune-telling">ดูดวงวัน/เดือน/ปีเกิด</Link></li>
+            <li><Link className="nav-link" href="/fortune/d-m-y">ดูดวงวัน/เดือน/ปีเกิด</Link></li>
             <li><Link className="nav-link" href="/fortune/siamsi">สุ่มเซียมซี</Link></li>
             <li><Link className="nav-link" href="/fortune/disc">ลูกเต๋าพยากรณ์</Link></li>
             <li><a className="nav-link" href="/fortune/phone">ทำนายเบอร์โทร</a></li>
