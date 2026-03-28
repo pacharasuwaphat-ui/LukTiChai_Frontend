@@ -34,9 +34,9 @@ export default function history() {
         // map ให้ตรงกับ UI เดิม
         const formatted = data.map((item, index) => ({
           id: item._id,
-          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" :  item.type ==="dice"? "ลูกเต๋าพยากรณ์" : "เสี่ยงเซียมซี"}`,
+          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" :  item.type ==="dice"? "ลูกเต๋าพยากรณ์" : item.type ==="siamsi"? "เสี่ยงเซียมซี" : "เบอร์โทรศัพท์"}`,
           date: new Date(item.createdAt).toLocaleString(),
-          image: item.type === "card" ? "/card/SunCard.png" : item.type ==="dice"? "/disc.png": "/siamsi.png"
+          image: item.type === "card" ? "/card/SunCard.png" : item.type ==="dice"? "/disc.png": item.type ==="siamsi"? "/siamsi.png": "/phone.png",
         }));
 
         setHistory(formatted);
@@ -79,6 +79,25 @@ ${advice}`);
         const readings = selected.reading;
 
         router.push(`/fortune/siamsi/result/${number}/${level}/${advice}/${readings}`);
+      }
+      else if ( selected.type === "phone"){
+        const phone = selected.phone;
+        const phone_number = phone.phone_number;
+        const score = phone.score;
+        const title = phone.title;
+        const readings = selected.reading;
+        const advice = phone.phone_advice;
+        // console.table(selected)
+
+        localStorage.setItem("fortuneResult", JSON.stringify({
+          historyId : id,
+          phone : phone_number,
+          score,
+          title,
+          readings,
+          advice
+        }));
+        router.push(`/fortune/phone/result/${id}`);
       }
   };
 

@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 
 export default function NumberPage() {
 
+  const router = useRouter();
+
   const [User , setUser] = useState(null);
   const [phoneDigits, setPhoneDigits] = useState(Array(10).fill(""));
 
@@ -26,6 +28,42 @@ export default function NumberPage() {
     }
   }
 
+  const handleViewResult = async () => {
+    try {
+      const userStr = localStorage.getItem("user");
+      if (!userStr) {
+        alert("กรุณาเข้าสู่ระบบก่อนดูผลการทำนาย");
+        return;
+      }
+      const user = JSON.parse(userStr);
+      // ยิง request ไป backend NestJS
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fortune/phone`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      
+        // ส่งข้อมูลไป backend
+        body: JSON.stringify({
+          Phone : phoneDigits.join(""),
+          userId : user.id
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+          throw new Error(data.message || "เกิดข้อผิดพลาดในการดึงข้อมูล");
+      }
+      
+      localStorage.setItem("fortuneResult", JSON.stringify(data));
+      // ไปหน้าผลการทำนาย
+      router.push(`/fortune/phone/result/${data.historyId}`);
+
+    } catch (error) {
+        console.error("Error fetching fortune siamsi:", error);
+    }
+  }
+
   useEffect(() => {
     getData();
   }, []);
@@ -34,7 +72,7 @@ export default function NumberPage() {
     <div className="mt-20">
 
       {/* Container */}
-      <div className="w-full max-w-5xl bg-[#070B2B] rounded-xl p-10 mt-20 shadow-xl px-30 py-20">
+      <div className="w-full max-w-5xl bg-[#070B2B] rounded-xl p-10 mt-10 shadow-xl px-30 py-20">
 
         {/* Title */}
         <h1 className="text-2xl font-bold mb-4">ทำนายเบอร์</h1>
@@ -80,7 +118,9 @@ export default function NumberPage() {
 
         {/* Button */}
         <div className="flex justify-center mb-10">
-          <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold px-6 py-2 rounded-full shadow-lg hover:scale-105 transition">
+          <button 
+          className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold px-6 py-2 rounded-full shadow-lg hover:scale-105 transition" 
+          onClick={handleViewResult}>
             วิเคราะห์เบอร์
           </button>
         </div>
