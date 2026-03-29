@@ -1,7 +1,9 @@
 "use client";
-import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
+    const router = useRouter();
     const dayRefs = [useRef(null), useRef(null)];
     const monthRefs = [useRef(null), useRef(null)];
     const yearRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -24,6 +26,26 @@ export default function Home() {
             allRefs[nextGroupStart]?.current?.focus();
         }
     };
+
+    useEffect(() => {
+        const userString = localStorage.getItem("user");
+        if (!userString) return;
+
+        const user = JSON.parse(userString);
+
+        if (user.dob) {
+            const d = new Date(user.dob);
+
+            const day = String(d.getDate()).padStart(2, "0");
+            const month = String(d.getMonth() + 1).padStart(2, "0");
+            const year = String(d.getFullYear());
+
+            setDayVals(day.split(""));
+            setMonthVals(month.split(""));
+            setYearVals(year.split(""));
+
+        }
+    }, []);
 
     const handleKeyDown = (vals, setVals, refs, index, e, groupOffset) => {
         if (e.key === "Backspace" && !vals[index] && index > 0) {
@@ -62,6 +84,46 @@ export default function Home() {
             />
         </div>
     );
+
+    const handleSubmit = async () => {
+
+        try {
+            const userString = localStorage.getItem("user");
+            const user = JSON.parse(userString);
+            
+            const day = dayVals.join("");
+            const month = monthVals.join("");
+            const year = yearVals.join("");
+
+            // ยิง request ไป backend NestJS
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fortune/dmy`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                // ส่งข้อมูลไป backend
+                body: JSON.stringify({
+                day : day,
+                month : month,
+                year : year,
+                userId : user.id
+                }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                setMessage(data.message || "get fortune dmy failed");
+                return;
+            }
+
+            localStorage.setItem("fortuneResult", JSON.stringify(data));
+            // navigate ไปหน้าผลลัพธ์
+            router.push(`/fortune/d-m-y/result/${data.historyId}`);
+
+        } catch (error) {
+            console.error("Error submitting date fortune:", error);
+        }
+        
+    }
 
     return (
         <div>
@@ -151,7 +213,10 @@ export default function Home() {
 
                 {/* Button */}
                 <div className="flex justify-center mb-10">
-                    <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold px-6 py-2 rounded-full shadow-lg hover:scale-105 transition">
+                    <button 
+                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold px-6 py-2 rounded-full shadow-lg hover:scale-105 transition"
+                    onClick={handleSubmit}
+                    >
                         ตรวจดวงชะตา
                     </button>
                 </div>
