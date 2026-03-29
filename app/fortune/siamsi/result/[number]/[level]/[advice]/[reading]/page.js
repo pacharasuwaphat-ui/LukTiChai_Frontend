@@ -2,10 +2,14 @@
 import { motion } from "framer-motion";
 import { use, useState , useEffect} from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function SiamSiPage({params}) {
 
   const { number ,level, advice, reading } = use(params);
+
+  const [getad , setGetAd] = useState(false);
+  const router = useRouter();
 
     const [Level, setLevel] = useState("good");
     const [SiamsiNumber, setSiamsiNumber] = useState(null);
@@ -21,8 +25,56 @@ export default function SiamSiPage({params}) {
   };
   
   useEffect(() => {
+    const fetchData = async () => {
+        const resultstr = localStorage.getItem("fortuneResult");
+        const result = JSON.parse(resultstr);
+
+        const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/fortune/findFortune/${result.historyId}`
+        );
+
+        if (!res.ok) {
+        throw new Error("Failed to fetch advice");
+        }
+
+        const fortuneData = await res.json();
+        setGetAd(fortuneData.getAdvice);
+    };
+
+    fetchData();
     Setdata();
   }, []);
+
+      const getAdvice = async () => {
+        const userstr = localStorage.getItem("user");
+        const user = JSON.parse(userstr);
+        const resultstr = localStorage.getItem("fortuneResult");
+        const result = JSON.parse(resultstr);
+        if (user.coin < 5) { 
+            router.push("/home/payment");  
+        }
+        console.log("fetching advice with historyId:", result?.historyId);
+        
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fortune/advice`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                // ส่งข้อมูลไป backend
+                body: JSON.stringify({
+                fortuneId: result?.historyId,
+            }),
+        });
+        if (!res.ok) {
+            throw new Error('Failed to fetch advice');
+        }
+        const data = await res.json();
+        setGetAd(true);
+        localStorage.setItem("user", JSON.stringify({
+            ...user,
+            coin: data.coin, // อัปเดตเหรียญใน localStorage
+        }));
+    }
 
 
   return (
@@ -87,12 +139,37 @@ export default function SiamSiPage({params}) {
         </div>
 
         {/* Advice */}
-        <div className="mt-6 mb-30 mx-20">
+        {getad && <div className="mt-6 mb-30 mx-20">
           <p className="text-red-500 font-bold">คำแนะนำสำเพิ่มเติม</p>
           <p className="text-gray-300 text-sm leading-relaxed">
             {Advice}
           </p>
-        </div>
+        </div>}
+
+        {/* Card */}
+                        {!getad && <div className="relative rounded-3xl p-10 text-center bg-gradient-to-br from-purple-700 via-purple-600 to-black shadow-[0_0_60px_rgba(168,85,247,0.4)] mt-10">
+
+                            {/* Glow overlay */}
+                            <div className="absolute inset-0 rounded-3xl bg-purple-500/10 blur-2xl"></div>
+
+                            {/* Content */}
+                            <div className="relative z-10 flex flex-col items-center gap-8">
+
+                            {/* Title */}
+                            <h2 className="text-2xl md:text-3xl font-bold text-yellow-400 flex items-center gap-2">
+                                🔒 ปลดล็อกเพื่อดูคำแนะนำเฉพาะคุณ
+                            </h2>
+
+                            {/* Button */}
+                            <button className="px-10 py-4 rounded-full bg-yellow-400 text-black text-xl font-bold shadow-[0_0_30px_rgba(250,204,21,0.7)] hover:scale-105 hover:shadow-[0_0_50px_rgba(250,204,21,1)] transition-all duration-300"
+                            onClick={getAdvice}
+                            >
+                                Use 5 Coin
+                            </button>
+
+                            </div>
+                        </div>
+                            }
 
       </div>
     </div>

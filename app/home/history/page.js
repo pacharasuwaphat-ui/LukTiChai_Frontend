@@ -55,6 +55,9 @@ export default function history() {
 
         const cards = selected.cards;
         const readings = selected.reading;
+        localStorage.setItem("fortuneResult", JSON.stringify({
+          historyId : id,
+        }));
 
         router.push(`/fortune/card/result?cards=${cards.present},${cards.advice},${cards.outcome}?readings=${readings}`);
 
@@ -66,6 +69,9 @@ export default function history() {
         const dice_name = dice.dice_name;
         const readings = selected.reading;
         const advice = dice.dice_advice;
+        localStorage.setItem("fortuneResult", JSON.stringify({
+          historyId : id,
+        }));
         
         router.push(`/fortune/disc/result/${[dice_id.zodiac, dice_id.planet, dice_id.house].join("-")}/
 ${[dice_name.zodiac, dice_name.planet, dice_name.house].join("-")}/${readings}/
@@ -77,6 +83,9 @@ ${advice}`);
         const advice = siamsi.siamsi_advice;
         const level = siamsi.siamsi_level;
         const readings = selected.reading;
+        localStorage.setItem("fortuneResult", JSON.stringify({
+          historyId : id,
+        }));
 
         router.push(`/fortune/siamsi/result/${number}/${level}/${advice}/${readings}`);
       }
