@@ -112,15 +112,15 @@ export default function HomeLayout({ children }) {
           {/* Account */}
           <div className="text-center">
             <h3 className="font-bold mb-3 text-white">บัญชี</h3>
-            <p className="cursor-pointer hover:text-yellow-400">เข้าสู่ระบบ</p>
-            <p className="cursor-pointer hover:text-yellow-400">ประวัติการทำนาย</p>
-            <p className="cursor-pointer hover:text-yellow-400">สมัครใช้งาน</p>
+            <p className="cursor-pointer hover:text-yellow-400"><Link href="/">เข้าสู่ระบบ</Link></p>
+            <p className="cursor-pointer hover:text-yellow-400"><Link href="/home/history">ประวัติการทำนาย</Link></p>
+            <p className="cursor-pointer hover:text-yellow-400"><Link href="/sign-up">สมัครใช้งาน</Link></p>
           </div>
 
           {/* Services */}
           <div className="text-center">
             <h3 className="font-bold mb-3 text-white">Services</h3>
-            <p className="cursor-pointer hover:text-yellow-400">About us</p>
+            <p className="cursor-pointer hover:text-yellow-400"><Link href="/about-us">About us</Link></p>
             <p className="cursor-pointer hover:text-yellow-400">github link</p>
           </div>
 
