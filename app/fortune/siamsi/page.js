@@ -45,6 +45,10 @@ export default function SiamSiPage() {
         return;
       }
 
+      localStorage.setItem("fortuneResult", JSON.stringify({
+        historyId: data.historyId,
+      }));
+
       // ไปหน้า result พร้อมส่งข้อมูลไปด้วย (อาจใช้ query หรือ state)
       router.push(`/fortune/siamsi/result/${resultNumber}/${data.level}/${data.advice}/${data.readings}`);
 

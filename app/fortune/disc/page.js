@@ -81,6 +81,9 @@ export default function DicePage() {
         setMessage(data.message || "get fortune card failed");
         return;
       }
+      localStorage.setItem("fortuneResult", JSON.stringify({
+        historyId: data.historyId,
+      }));
 
       // ไปหน้า result พร้อมส่งข้อมูลไปด้วย (อาจใช้ query หรือ state)
       router.push(`/fortune/disc/result/${[result.zodiac, result.planet, result.house].join("-")}/
