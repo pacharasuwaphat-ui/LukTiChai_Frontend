@@ -34,11 +34,9 @@ export default function history() {
         // map ให้ตรงกับ UI เดิม
         const formatted = data.map((item, index) => ({
           id: item._id,
-          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" :  item.type ==="dice"? "ลูกเต๋าพยากรณ์" : item.type ==="siamsi"? "เสี่ยงเซียมซี" : 
-            item.type ==="phone"? "เบอร์โทรศัพท์" : "วันเดือนปีเกิด"}`,
+          title: `ดูดวงแบบ : ${item.type === "card" ? "เปิดไพ่" :  item.type ==="dice"? "ลูกเต๋าพยากรณ์" : item.type ==="siamsi"? "เสี่ยงเซียมซี" : "เบอร์โทรศัพท์"}`,
           date: new Date(item.createdAt).toLocaleString(),
-          image: item.type === "card" ? "/card/SunCard.png" : item.type ==="dice"? "/disc.png": item.type ==="siamsi"? "/siamsi.png": 
-          item.type ==="phone"? "/phone.png" : "/cake.png",
+          image: item.type === "card" ? "/card/SunCard.png" : item.type ==="dice"? "/disc.png": item.type ==="siamsi"? "/siamsi.png": "/phone.png",
         }));
 
         setHistory(formatted);
@@ -109,22 +107,6 @@ ${advice}`);
           advice
         }));
         router.push(`/fortune/phone/result/${id}`);
-      }
-      else if ( selected.type === "date"){
-        console.log(selected)
-        const date = selected.dmy;
-        const prediction = date.prediction;
-        const lucky_colors = date.lucky_colors;
-        const dob = date.dob;
-        // console.table(selected)
-
-        localStorage.setItem("fortuneResult", JSON.stringify({
-          historyId : id,
-          dob,
-          prediction,
-          lucky_colors
-        }));
-        router.push(`/fortune/d-m-y/result/${id}`);
       }
   };
 
