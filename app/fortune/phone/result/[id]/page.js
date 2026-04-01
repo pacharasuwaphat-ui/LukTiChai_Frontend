@@ -5,6 +5,8 @@ import { useState , useEffect } from "react";
 export default function PhonePage() {
   const [phone, setPhone] = useState("0625235775");
   const [result, setResult] = useState(null);
+  const [getad, setGetAd] = useState(false);
+  const [Advice, setAdvice] = useState("");
 
   const getData = () =>{
     const resultstring = localStorage.getItem("fortuneResult");
@@ -135,12 +137,6 @@ export default function PhonePage() {
             {result && result.advice ? result.advice : "N/A"}
           </p>
         </div>}
-        {getad && <div>
-            <p className="text-red-500 font-bold mb-2">คำแนะนำ</p>
-            <p className="text-sm text-white/80 leading-relaxed">
-              {Advice}
-            </p>
-          </div>}
           {/* Card */}
                         {!getad && <div className="relative rounded-3xl p-10 text-center bg-gradient-to-br from-purple-700 via-purple-600 to-black shadow-[0_0_60px_rgba(168,85,247,0.4)]">
 
