@@ -107,6 +107,7 @@ export default function Home() {
         const user = JSON.parse(userstr);
         if (user.coin < 5) { 
             router.push("/home/payment");  
+            return;
         }
         console.log("fetching advice with historyId:", result?.historyId);
         

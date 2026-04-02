@@ -45,6 +45,7 @@ export default function PhonePage() {
         const result = JSON.parse(resultstr);
         if (user.coin < 5) { 
             router.push("/home/payment");  
+            return;
         }
         console.log("fetching advice with historyId:", result?.historyId);
         

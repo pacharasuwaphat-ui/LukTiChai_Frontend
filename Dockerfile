@@ -3,7 +3,6 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# 👇 ใส่ค่า fix ไปเลย (ชั่วคราว)
 ENV NEXT_PUBLIC_API_URL=https://lucktichai-backend.onrender.com
 
 COPY package*.json ./
